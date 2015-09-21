@@ -1,0 +1,136 @@
+buildscript {
+    ext {
+        springBootVersion = '1.2.6.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}") 
+        classpath("io.spring.gradle:dependency-management-plugin:0.5.2.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'eclipse'
+apply plugin: 'idea'
+apply plugin: 'spring-boot' 
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'war'
+
+jar {
+    baseName = 'surffer'
+    version = '0.0.1-SNAPSHOT'
+}
+
+
+//war version, 이름
+war {
+    baseName = 'ROOT'
+}
+
+String springVersion = "4.1.2.RELEASE"
+String slf4jVersion = "1.7.7"
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+repositories {
+    mavenCentral()
+}
+
+
+dependencies {
+
+    compile("org.springframework.boot:spring-boot-starter-jdbc")
+    compile("org.springframework.boot:spring-boot-starter-web")
+    runtime("mysql:mysql-connector-java")
+    //spring
+    compile("org.springframework:spring-context:" + springVersion)
+    compile("org.springframework:spring-context-support:" + springVersion)
+    compile("org.springframework:spring-aop:" + springVersion)
+    compile("org.springframework:spring-beans:" + springVersion)
+    compile("org.springframework:spring-core:" + springVersion)
+    compile("org.springframework:spring-expression:" + springVersion)
+    compile("org.springframework:spring-webmvc:" + springVersion)
+    compile("org.springframework:springloaded:1.2.4.RELEASE")
+
+    //lombok
+    compile("org.projectlombok:lombok:1.16.6")
+
+    //Needed for XML View (with JAXB2)
+    compile("org.springframework:spring-oxm:" + springVersion)
+
+    //Needed for JSON View
+    compile("com.fasterxml.jackson.core:jackson-databind:2.4.1.3")
+    compile("com.fasterxml.jackson.core:jackson-annotations:2.4.1")
+
+    //mongo
+    compile ("org.springframework.data:spring-data-mongodb:1.5.2.RELEASE")
+
+    compile('javax.servlet:javax.servlet-api:3.1.0')
+    compile('javax.servlet:jstl:1.2')
+
+    //logging
+    compile("org.lazyluke:log4jdbc-remix:0.2.7")
+
+    //json
+    compile ("com.fasterxml.jackson.core:jackson-databind:2.4.3")
+    compile ("org.codehaus.jackson:jackson-mapper-asl:1.9.13")
+    compile ("org.codehaus.jackson:jackson-core-asl:1.9.13")
+    compile ("com.eclipsesource.minimal-json:minimal-json:0.9.1")
+    compile ("com.jayway.jsonpath:json-path:2.0.0")
+
+    //db access
+    compile "org.springframework:spring-jdbc:" + springVersion
+    compile "org.springframework:spring-orm:" + springVersion
+    compile "org.springframework.data:spring-data-jpa:1.7.0.RELEASE"
+    compile 'org.mybatis:mybatis:3.2.8'
+    compile 'org.mybatis:mybatis-spring:1.2.2'
+    compile "mysql:mysql-connector-java:5.1.30"
+    compile "org.mariadb.jdbc:mariadb-java-client:1.1.7"
+    compile "com.mchange:c3p0:0.9.5-pre8"
+    compile "commons-dbcp:commons-dbcp:1.4"
+
+    //mail
+    compile('javax.mail:mail:1.4.7')
+
+    //sitemesh
+    compile "opensymphony:sitemesh:2.4.2"
+
+    // jtoml
+    compile "io.ous:jtoml:1.0.1"
+
+    //other
+    compile "com.google.guava:guava:18.0"
+    compile "joda-time:joda-time:2.5"
+    compile "org.jadira.usertype:usertype.jodatime:2.0.1"
+
+    //httpClient
+    compile "org.apache.httpcomponents:httpclient:4.5"
+    compile "org.elasticsearch:elasticsearch:1.7.1"
+    compile "org.codelibs:elasticsearch-util:1.5.0"
+
+    compile "commons-lang:commons-lang:2.3"
+
+    //testing
+    testCompile "junit:junit:4.11"
+    testCompile "org.mockito:mockito-all:1.10.8"
+    testCompile "org.hamcrest:hamcrest-all:1.3"
+    testCompile "org.springframework:spring-test:" + springVersion
+    testCompile "org.easymock:easymock:3.1"
+    testCompile "com.restfuse:com.eclipsesource.restfuse:1.2.0"
+    testCompile  "javax.inject:javax.inject:1"
+}
+
+
+eclipse {
+    classpath {
+         containers.remove('org.eclipse.jdt.launching.JRE_CONTAINER')
+         containers 'org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8'
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '2.3'
+}

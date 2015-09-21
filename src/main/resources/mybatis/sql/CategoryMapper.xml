@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.martmoa.surffer.dao.CategoryMapper">
+
+	<cache />
+
+	<select id="getAllCategory" resultType="Category"  useCache="false" flushCache="true">
+    SELECT CAT_ID			AS categoryId
+         , CAT_LVL			AS categoryLevel
+         , PARENT_CAT_ID	AS upCategoryId
+         , SORT_ORDER		AS categoryOrder
+         , CAT_NM			AS categoryName
+         , CAT_IMG_URL		AS categoryThumImg
+      FROM CATEGORY
+     WHERE cat_lvl NOT IN (4)
+     AND IS_USE = TRUE
+	</select>
+
+    <select id="searchCategoryList" parameterType="Category" resultType="Category"  useCache="false" flushCache="true">
+        SELECT CAT_ID		AS categoryId
+          , CAT_LVL			AS categoryLevel
+          , PARENT_CAT_ID	AS upCategoryId
+          , SORT_ORDER		AS categoryOrder
+          , CAT_NM			AS categoryName
+          , CAT_IMG_URL		AS categoryThumImg
+          FROM CATEGORY
+         WHERE PARENT_CAT_ID = #{upCategoryId}
+         AND IS_USE = TRUE
+     ORDER BY  SORT_ORDER
+    </select>
+
+    <select id="searchCategoryKeywordList" parameterType="Category" resultType="Category">
+        SELECT CAT_ID		AS categoryId
+        , CAT_LVL			AS categoryLevel
+        , PARENT_CAT_ID	AS upCategoryId
+        , SORT_ORDER		AS categoryOrder
+        , CAT_NM			AS categoryName
+        , CAT_IMG_URL		AS categoryThumImg
+        FROM CATEGORY
+        WHERE PARENT_CAT_ID like CONCAT(#{upCategoryId}, '%')
+         AND CAT_LVL = 4
+    </select>
+
+
+</mapper>
