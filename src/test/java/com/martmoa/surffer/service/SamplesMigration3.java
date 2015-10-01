@@ -17,7 +17,6 @@ import org.elasticsearch.common.xcontent.XContentFactory;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import com.martmoa.common.StringUtil;
 
 public class SamplesMigration3 {
     public static void main(String[] args) {
@@ -27,8 +26,6 @@ public class SamplesMigration3 {
             e.printStackTrace();
         }
     }
-
-    public static StringUtil stringUtil = new StringUtil();
 
     protected static void createSampleData() throws Exception
     {
@@ -104,7 +101,8 @@ public class SamplesMigration3 {
                             XContentBuilder obj = XContentFactory.jsonBuilder()
                                     .startObject()
                                     .field("keyword_id", parameter1)
-                                    .field("keyword", stringUtil.convertKeyByKeyword(parameter2))
+                                 //   .field("keyword", stringUtil.convertKeyByKeyword(parameter2))
+                                    .field("keyword", parameter2)
                                     .field("display_keyword", parameter3)
                                     .field("keyword_ranking", parameter4)
                                     .endObject();

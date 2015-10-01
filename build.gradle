@@ -35,8 +35,13 @@ String slf4jVersion = "1.7.7"
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
 
+//jar 저장소
 repositories {
     mavenCentral()
+    jcenter()
+    maven {
+        url "http://125.209.193.115:8070/content/groups/public"
+    }
 }
 
 
@@ -96,7 +101,7 @@ dependencies {
     compile('javax.mail:mail:1.4.7')
 
     //sitemesh
-    compile "opensymphony:sitemesh:2.4.2"
+    //compile "opensymphony:sitemesh:2.4.2"
 
     // jtoml
     compile "io.ous:jtoml:1.0.1"
@@ -112,6 +117,7 @@ dependencies {
     compile "org.codelibs:elasticsearch-util:1.5.0"
 
     compile "commons-lang:commons-lang:2.3"
+    compile "com.argo.arirang:morph:1.0.0"
 
     //testing
     testCompile "junit:junit:4.11"
@@ -120,7 +126,7 @@ dependencies {
     testCompile "org.springframework:spring-test:" + springVersion
     testCompile "org.easymock:easymock:3.1"
     testCompile "com.restfuse:com.eclipsesource.restfuse:1.2.0"
-    testCompile  "javax.inject:javax.inject:1"
+    testCompile "javax.inject:javax.inject:1"
 }
 
 

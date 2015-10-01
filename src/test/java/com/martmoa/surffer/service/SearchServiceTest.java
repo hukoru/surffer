@@ -1,17 +1,11 @@
 package com.martmoa.surffer.service;
 
-import com.martmoa.thor.config.DataConfig;
-import com.martmoa.thor.config.PropertiesConfig;
-import com.martmoa.thor.constant.ResponseAttribute;
-import com.martmoa.thor.constant.ResponseCode;
-import com.martmoa.thor.dao.CategoryMapper;
-import com.martmoa.thor.dao.ProductMapper;
-import com.martmoa.thor.domain.Category;
-import com.martmoa.thor.domain.Product;
-//import org.bitbucket.eunjeon.seunjeon.Analyzer;
-//import org.bitbucket.eunjeon.seunjeon.Term;
-import org.bitbucket.eunjeon.seunjeon.Analyzer;
-import org.bitbucket.eunjeon.seunjeon.Term;
+import com.martmoa.surffer.config.DataConfig;
+import com.martmoa.surffer.config.PropertiesConfig;
+import com.martmoa.surffer.constant.ResponseAttribute;
+import com.martmoa.surffer.constant.ResponseCode;
+import com.martmoa.surffer.dao.CategoryMapper;
+import com.martmoa.surffer.domain.Category;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.elasticsearch.action.search.SearchRequestBuilder;
 import org.elasticsearch.action.search.SearchResponse;
@@ -42,7 +36,10 @@ import java.io.BufferedWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.net.URLDecoder;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import static java.lang.String.format;
 
@@ -50,18 +47,15 @@ import static java.lang.String.format;
 @ContextConfiguration(classes = {PropertiesConfig.class, DataConfig.class})
 public class SearchServiceTest {
 
-    private static final Logger logger = LoggerFactory.getLogger(CategoryServiceTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(SearchServiceTest.class);
 
     private final ObjectMapper mapper = new ObjectMapper();
 
-    @Autowired
-    ProductMapper productMapper;
 
     @Autowired
     CategoryMapper categoryMapper;
 
 
-    private Product product = new Product();
 
     private Category category = new Category();
 
@@ -300,25 +294,6 @@ public class SearchServiceTest {
 
     }
 
-
-    @Test
-    public void searchAnalyzeTest2() {
-
-        List<Term> result = Analyzer.parseJava("형태소분석기입니다. 사랑합니다.");
-
-        String[] analyzeTerm;
-
-        for (Term term: result) {
-            System.out.println(term.surface());
-            analyzeTerm = term.feature().split(",");
-            if(analyzeTerm.equals("NNG")){
-                System.out.println(term.toString());
-            }
-
-        }
-
-    }
-
     @Test
     public void searchAnalyzeTest() {
 
@@ -348,7 +323,6 @@ public class SearchServiceTest {
 
             //List<Category> categoryList = categoryMapper.searchCategoryKeywordList(category);
 
-            List<Product> prodList = null;
 
 
             OutputStreamWriter osw = new OutputStreamWriter(fos, "MS949");

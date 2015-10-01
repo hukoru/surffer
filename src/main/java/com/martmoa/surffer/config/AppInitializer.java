@@ -2,7 +2,6 @@ package com.martmoa.surffer.config;
 
 import com.martmoa.surffer.config.filter.CORSFilter;
 import com.martmoa.surffer.service.impl.*;
-import com.opensymphony.sitemesh.webapp.SiteMeshFilter;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
@@ -34,7 +33,7 @@ public class AppInitializer extends AbstractAnnotationConfigDispatcherServletIni
 	protected Filter[] getServletFilters() {
 		CharacterEncodingFilter characterEncodingFilter = new CharacterEncodingFilter();
 		characterEncodingFilter.setEncoding("UTF-8");
-		return new Filter[]{ characterEncodingFilter, new SiteMeshFilter(), new CORSFilter()};
+		return new Filter[]{ characterEncodingFilter, new CORSFilter()};
 	}
 
 
